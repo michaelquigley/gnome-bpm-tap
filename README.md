@@ -28,6 +28,13 @@ triplet values are ×2⁄3.
 - **Two panel appearances** — toggle "Show tempo number in panel" to switch
   between `♪ 120` and a compact `♪` glyph.
 
+## Requirements
+
+- **GNOME Shell 45–48** (uses the ESM extension format introduced in 45).
+- **`glib-compile-schemas`** (from `glib2` / `libglib2.0-dev-bin`) to build the
+  GSettings schema. Already present on virtually all GNOME systems.
+- **`gnome-extensions`** CLI (ships with GNOME Shell) to enable or pack it.
+
 ## Install
 
 ### From source
