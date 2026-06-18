@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist>
+  <schema id="org.gnome.shell.extensions.bpm-tap"
+          path="/org/gnome/shell/extensions/bpm-tap/">
+    <key name="last-bpm" type="i">
+      <default>120</default>
+      <range min="40" max="300"/>
+      <summary>Last used tempo</summary>
+      <description>The most recently set BPM, restored when the extension loads.</description>
+    </key>
+    <key name="show-tempo-label" type="b">
+      <default>true</default>
+      <summary>Show the tempo number in the panel</summary>
+      <description>When enabled the panel shows the note glyph and the current BPM; when disabled it shows only the note glyph.</description>
+    </key>
+  </schema>
+</schemalist>

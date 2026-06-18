@@ -48,14 +48,18 @@ function formatMs(ms) {
 
 const BpmIndicator = GObject.registerClass(
 class BpmIndicator extends PanelMenu.Button {
-    _init() {
+    _init(settings) {
         super._init(0.0, 'BPM Tap', false);
 
-        this._bpm = DEFAULT_BPM;
+        this._settings = settings;
+        this._bpm = clampBpm(settings.get_int('last-bpm'));
         this._lastTap = 0;
         this._intervals = [];
         this._cells = []; // {button, label, factor, mult}
         this._feedbackId = 0;
+
+        this._appearanceId = settings.connect('changed::show-tempo-label',
+            () => this._refresh());
 
         this._panelLabel = new St.Label({
             text: `♪ ${this._bpm}`,
@@ -217,6 +221,14 @@ class BpmIndicator extends PanelMenu.Button {
 
         this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
+        // --- Appearance toggle (BPM PRO's "two appearances") ---
+        const appearance = new PopupMenu.PopupSwitchMenuItem(
+            'Show tempo number in panel',
+            this._settings.get_boolean('show-tempo-label'));
+        appearance.connect('toggled', (_item, state) =>
+            this._settings.set_boolean('show-tempo-label', state));
+        this.menu.addMenuItem(appearance);
+
         // --- Reset ---
         const reset = new PopupMenu.PopupMenuItem('Reset');
         reset.connect('activate', () => {
@@ -259,11 +271,13 @@ class BpmIndicator extends PanelMenu.Button {
             return;
         }
         this._bpm = next;
+        this._settings.set_int('last-bpm', next);
         this._refresh(fromSlider);
     }
 
     _refresh(fromSlider = false) {
-        this._panelLabel.text = `♪ ${this._bpm}`;
+        const showLabel = this._settings.get_boolean('show-tempo-label');
+        this._panelLabel.text = showLabel ? `♪ ${this._bpm}` : '♪';
         this._readout.text = `${this._bpm}`;
 
         if (!fromSlider && this._slider) {
@@ -303,13 +317,17 @@ class BpmIndicator extends PanelMenu.Button {
             GLib.source_remove(this._feedbackId);
             this._feedbackId = 0;
         }
+        if (this._appearanceId) {
+            this._settings.disconnect(this._appearanceId);
+            this._appearanceId = 0;
+        }
         super.destroy();
     }
 });
 
 export default class BpmExtension extends Extension {
     enable() {
-        this._indicator = new BpmIndicator();
+        this._indicator = new BpmIndicator(this.getSettings());
         Main.panel.addToStatusArea(this.uuid, this._indicator);
     }
 

@@ -22,12 +22,19 @@ Inspired by [BPM PRO for macOS](https://bpmpro.hypertron-instrument.com/).
 The timing math: a quarter note is `60000 / BPM` ms; dotted values are ×1.5,
 triplet values are ×2⁄3.
 
+## Features (continued)
+
+- **Persistence** — the last tempo is remembered across reloads (GSettings).
+- **Two panel appearances** — toggle "Show tempo number in panel" to switch
+  between `♪ 120` and a compact `♪` glyph.
+
 ## Install
 
 ### From source
 
 ```sh
 git clone https://github.com/michaelquigley/gnome-bpm-tap.git
+glib-compile-schemas gnome-bpm-tap/src/schemas/
 ln -s "$PWD/gnome-bpm-tap/src" \
   "$HOME/.local/share/gnome-shell/extensions/bpm-tap@quigley.com"
 ```
@@ -45,13 +52,11 @@ gnome-extensions enable bpm-tap@quigley.com
 
 ## Develop
 
-The extension source lives in [`src/`](src/). To build a distributable zip:
+The extension source lives in [`src/`](src/). To build a distributable zip
+(this auto-includes `stylesheet.css` and compiles `schemas/`):
 
 ```sh
-cd src
-gnome-extensions pack \
-  --extra-source=stylesheet.css \
-  --out-dir=..
+gnome-extensions pack src --out-dir=.
 ```
 
 ## License
