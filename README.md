@@ -1,5 +1,7 @@
 # BPM Tap
 
+![BPM Tap screenshot](docs/images/bpm-tap.png)
+
 A GNOME Shell extension that lives in the top panel as a tap-tempo calculator.
 Tap to detect BPM and read the millisecond delay times for each note division
 (normal, dotted, triplet). Click any value to copy it — handy for dialing in
