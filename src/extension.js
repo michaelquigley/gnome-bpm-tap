@@ -79,7 +79,7 @@ class BpmIndicator extends PanelMenu.Button {
             can_focus: false,
         });
         const topBox = new St.BoxLayout({
-            vertical: true,
+            orientation: Clutter.Orientation.VERTICAL,
             x_expand: true,
             style: 'spacing: 4px;',
         });
