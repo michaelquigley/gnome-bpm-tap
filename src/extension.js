@@ -21,12 +21,12 @@ const MAX_INTERVALS = 8;
 // Note divisions, expressed as a multiplier of the quarter-note duration.
 // quarter = 60000 / BPM ms.
 const DIVISIONS = [
-    {label: '1/1',  factor: 4},
-    {label: '1/2',  factor: 2},
-    {label: '1/4',  factor: 1},
-    {label: '1/8',  factor: 0.5},
-    {label: '1/16', factor: 0.25},
-    {label: '1/32', factor: 0.125},
+    {label: '1/4',   factor: 1},
+    {label: '1/8',   factor: 0.5},
+    {label: '1/16',  factor: 0.25},
+    {label: '1/32',  factor: 0.125},
+    {label: '1/64',  factor: 0.0625},
+    {label: '1/128', factor: 0.03125},
 ];
 
 const VARIANTS = [
