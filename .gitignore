@@ -1,0 +1,7 @@
+# Packed extension bundles
+*.zip
+*.shell-extension.zip
+
+# Editor / OS cruft
+*~
+.DS_Store

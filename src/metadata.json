@@ -1,0 +1,8 @@
+{
+  "uuid": "bpm-tap@quigley.com",
+  "name": "BPM Tap",
+  "description": "Tap-tempo calculator in the top panel. Tap to detect BPM and read the millisecond delay times for each note division (normal, dotted, triplet). Click any value to copy it. Inspired by BPM PRO for macOS.",
+  "shell-version": ["45", "46", "47", "48"],
+  "url": "https://github.com/michaelquigley/gnome-bpm-tap",
+  "version": 1
+}
